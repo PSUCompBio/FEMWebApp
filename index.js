@@ -1,7 +1,17 @@
+//var AWS = require("aws-sdk");
+
+//AWS.config.loadFromPath('./credentials/accessKeys.json');
+
 var AWS = require("aws-sdk");
-
-AWS.config.loadFromPath('./credentials/accessKeys.json');
-
+AWS.config.region = "us-east-1";
+AWS.config.getCredentials(function(err) {
+      if (err) console.log(err.stack);
+      // credentials not loaded
+      else {
+      console.log("Access key:", AWS.config.credentials.accessKeyId);
+      console.log("Secret access key:", AWS.config.credentials.secretAccessKey);
+  }
+});
 
 let docClient = new AWS.DynamoDB.DocumentClient();
 let fetchOneByKey = function () {
