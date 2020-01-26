@@ -1,8 +1,8 @@
-//var AWS = require("aws-sdk");
-
-//AWS.config.loadFromPath('./credentials/accessKeys.json');
+var siteConfig = require('./configuration');
 
 var AWS = require("aws-sdk");
+
+AWS.config.loadFromPath('./credentials/accessKeys.json');
 AWS.config.region = "us-east-1";
 AWS.config.getCredentials(function(err) {
       if (err) console.log(err.stack);
@@ -16,7 +16,8 @@ AWS.config.getCredentials(function(err) {
 let docClient = new AWS.DynamoDB.DocumentClient();
 let fetchOneByKey = function () {
     var params = {
-        TableName: "usersn",
+    //  TableName: "usersn", siteConfig.databaseName,
+        TableName: siteConfig.databaseName ,
         Key: {
             "email_id": "example@gmail.com"
         }
